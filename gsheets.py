@@ -18,9 +18,14 @@ args = parser.parse_args()
 # Setup API connection
 scope = ["https://spreadsheets.google.com/feeds",'https://www.googleapis.com/auth/spreadsheets',"https://www.googleapis.com/auth/drive.file","https://www.googleapis.com/auth/drive"]
 
-creds = ServiceAccountCredentials.from_json_keyfile_name("creds.json", scope)
 
-client = gspread.authorize(creds)
+
+try:
+    creds = ServiceAccountCredentials.from_json_keyfile_name("creds.json", scope)
+    client = gspread.authorize(creds)
+except:
+    print("Invalid authorisation credentials.")
+    quit()
 
 
 
@@ -30,7 +35,7 @@ sheet = book.worksheet("Researcher Book")
 
 # Ensure element name headers are all empty.
 cellRange = sheet.range("D7:BA7")
-print("Cleaning element headers...")
+print("Cleaning element headers...", end=" ")
 for cell in cellRange:
     cell.value = ""
     sheet.update_cells(cellRange)
@@ -57,7 +62,7 @@ with open(args.csv_file, "r") as f:
             continue
     
     # Batch update cells
-    print("Writing csv data to cells")
+    print("Writing data to cells...", end=" ")
     sheet.update_cells(cell_list, value_input_option="USER_ENTERED")
 print("DONE")
 end = time.time()
