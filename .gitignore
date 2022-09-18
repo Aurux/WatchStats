@@ -1,2 +1,5 @@
 # Ignore .json to prevent private key leaks
 *.json
+
+# Ignore venv changes
+venv/
