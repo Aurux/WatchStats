@@ -5,7 +5,7 @@ Script for parsing a prepared csv dataset into a WatchStats workbook.
 
 ## Usage
 ### Setup
-* Make sure that your credential file is in the same directory as the script.
+* Make sure that your credential file is in the same directory as the script and name it `creds.json`.
 * Take your client email out of the credential file and share the workbook with that email.
 ### Example command
 ```python3 gsheets.py "Comparison: Most Popular Mobile OS" "Most_Popular_Mobile_OS/formatted_data.csv"```
